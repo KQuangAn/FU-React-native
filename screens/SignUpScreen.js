@@ -1,0 +1,128 @@
+import {
+  ActivityIndicator,
+  Button,
+  KeyboardAvoidingView,
+  Pressable,
+  TextInput,
+  View,
+  Text,
+} from "react-native";
+import React, { useLayoutEffect, useState, useEffect } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { FIREBASE_AUTH } from "../FirebaseConfig";
+import { AntDesign } from "@expo/vector-icons";
+import { useForm, Controller } from "react-hook-form";
+import CustomInput from "../components/CustomInput";
+import { useNavigation } from "@react-navigation/native";
+
+const EMAIL_REGEX = "/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i";
+
+export default function SignUpScreen() {
+  const [loading, setLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
+  const { control, handleSubmit, watch } = useForm();
+  const password = watch("password ");
+  const navigation = useNavigation();
+
+  const onSignInPressed = () => {
+    navigation.navigate("Login");
+  };
+
+  const signUp = async () => {
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+      alert("sign up failed at" + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <View>
+      <View className="flex flex-col">
+        <Text className="text-green-100 text-4xl w-full h-10">
+          Create Account
+        </Text>
+        <Text className="text-black-400 w-full h-10">
+          Sign up to get started!
+        </Text>
+      </View>
+
+      <KeyboardAvoidingView behavior="padding" className="flex flex-col">
+        <CustomInput
+          name="username"
+          placeholder="Username"
+          secureTextEntry
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password should be at least 8 characters",
+            },
+            maxLength: {
+              value: 24,
+              message: "Password should be no more than 24 characters",
+            },
+          }}
+        />
+        <CustomInput
+          name="email"
+          placeholder="Email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: EMAIL_REGEX,
+          }}
+        />
+
+        <CustomInput
+          name="password"
+          placeholder="Password"
+          secureTextEntry
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password should be at least 8 characters",
+            },
+            maxLength: {
+              value: 24,
+              message: "Password should be no more than 24 characters",
+            },
+          }}
+        />
+
+        <CustomInput
+          name="password-repeat"
+          placeholder="Repeat Password"
+          secureTextEntry
+          control={control}
+          rules={{
+            required: "Password repeat is required",
+            validate: (value) => value == pwd || "Password do not match",
+          }}
+        />
+        {loading ? (
+          <ActivityIndicator size="large" color="fffff" />
+        ) : (
+          <>
+            <Pressable className="w-3/4 m-5 bg-green-100 items-center">
+              <Button title="Already ? SignIn" onPress={onSignInPressed()} />
+            </Pressable>
+          </>
+        )}
+      </KeyboardAvoidingView>
+    </View>
+  );
+}
