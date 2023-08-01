@@ -2,10 +2,10 @@ import {
   ActivityIndicator,
   Button,
   KeyboardAvoidingView,
-  Pressable,
-  TextInput,
+  ScrollView,
   View,
   Text,
+  TouchableOpacity,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -24,6 +24,7 @@ export default function LoginScreen() {
   const navigation = useNavigation();
 
   const onSignUpPressed = () => {
+    console.log("change screen");
     navigation.navigate("SignUp");
   };
 
@@ -41,10 +42,10 @@ export default function LoginScreen() {
   };
 
   return (
-    <View className="flex-1 flex-col w-full h-full bg-white">
-      <View className="m-5 my-16">
-        <Text className="text-green-700 text-4xl w-full">Welcome</Text>
-        <Text className="text-2xl text-black-400 w-full ">
+    <ScrollView className="flex-1 flex-col w-full h-full bg-white">
+      <View className="m-5 my-12 w-full">
+        <Text className="text-green-700 text-4xl">Welcome</Text>
+        <Text className="text-2xl text-black-400 ">
           Sign in to continue!
         </Text>
       </View>
@@ -84,21 +85,37 @@ export default function LoginScreen() {
           <ActivityIndicator size="large" color="fffff" />
         ) : (
           <>
-            <Button
-              className="w-3/4 m-5 text-green-500 "
-              onPress={handleSubmit(signIn)}
-              title="Sign in"
-            />
-
-            <Button
-              className="m-5 text-green-500"
-              onPress={onSignUpPressed()}
-              title="Sign up"
-              color="#ff5c5c"
-            />
+            <View className="flex flex-col w-full text-center items-center justify-between mt-6">
+              <View className="space-y-4 w-full">
+                <TouchableOpacity
+                  className="w-full p-4 items-center rounded-xl bg-green-600 "
+                  onPress={handleSubmit(signIn)}
+                >
+                  <Text className="text-white text-md">LOG IN</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className="w-full text-center items-center ">
+                  <Text className="text-green-800 text-md">
+                    Forgot Password
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity className="w-full items-center rounded bg-white">
+                  <Text className="text-green-800 text-md">
+                    Login with google
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                className="w-full text-center items-center "
+                onPress={() => onSignUpPressed()}
+              >
+                <Text className="text-green-800 text-md ">
+                  I am a new user, sign me up
+                </Text>
+              </TouchableOpacity>
+            </View>
           </>
         )}
       </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 }

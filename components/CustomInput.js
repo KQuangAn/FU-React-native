@@ -10,18 +10,19 @@ export default function CustomInput({
   secureTextEntry,
 }) {
   return (
-    <Controller
-      control={control}
-      name={name}
-      rules={rules}
-      render={({
-        field: { value, onChange, onBlur },
-        fieldState: { error },
-      }) => (
-        <>
-          <Text className="text-black-400 w-full my-2">{placeholder}</Text>
-          <View
-            className={`
+    <View className="my-2 w-full">
+      <Controller
+        control={control}
+        name={name}
+        rules={rules}
+        render={({
+          field: { value, onChange, onBlur },
+          fieldState: { error },
+        }) => (
+          <>
+            <Text className="text-black-400 w-full my-2">{placeholder}</Text>
+            <View
+              className={`
             w-full
             bg-white
             border
@@ -30,22 +31,23 @@ export default function CustomInput({
             p-5
             mb-1
            ${error ? "border-red-600" : "border-gray-500"}`}
-          >
-            <TextInput
-              className="h-50 w-full b-1 "
-              value={value}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              secureTextEntry={secureTextEntry}
-            />
-          </View>
-          {error && (
-            <Text className="text-red-300 align-stretch ">
-              {error.message}{" "}
-            </Text>
-          )}
-        </>
-      )}
-    />
+            >
+              <TextInput
+                className="h-5 w-full b-1 rounded-2xl"
+                value={value}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                secureTextEntry={secureTextEntry}
+              />
+            </View>
+            {error && (
+              <Text className="text-red-300 align-stretch ">
+                {error.message}{" "}
+              </Text>
+            )}
+          </>
+        )}
+      />
+    </View>
   );
 }

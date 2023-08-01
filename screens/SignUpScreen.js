@@ -3,9 +3,10 @@ import {
   Button,
   KeyboardAvoidingView,
   Pressable,
-  TextInput,
+  ScrollView,
   View,
   Text,
+  TouchableOpacity,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -47,17 +48,18 @@ export default function SignUpScreen() {
   };
 
   return (
-    <View>
-      <View className="flex flex-col">
-        <Text className="text-green-100 text-4xl w-full h-10">
-          Create Account
-        </Text>
-        <Text className="text-black-400 w-full h-10">
-          Sign up to get started!
+    <ScrollView className="flex-1 flex-col w-full h-full bg-white">
+      <View className="m-5 my-12">
+        <Text className="text-green-700 text-4xl w-full">Welcome</Text>
+        <Text className="text-2xl text-black-400 w-full ">
+          Sign up to continue!
         </Text>
       </View>
 
-      <KeyboardAvoidingView behavior="padding" className="flex flex-col">
+      <KeyboardAvoidingView
+        behavior="padding"
+        className="flex flex-col items-start mx-5 "
+      >
         <CustomInput
           name="username"
           placeholder="Username"
@@ -84,7 +86,6 @@ export default function SignUpScreen() {
             pattern: EMAIL_REGEX,
           }}
         />
-
         <CustomInput
           name="password"
           placeholder="Password"
@@ -102,7 +103,6 @@ export default function SignUpScreen() {
             },
           }}
         />
-
         <CustomInput
           name="password-repeat"
           placeholder="Repeat Password"
@@ -117,12 +117,27 @@ export default function SignUpScreen() {
           <ActivityIndicator size="large" color="fffff" />
         ) : (
           <>
-            <Pressable className="w-3/4 m-5 bg-green-100 items-center">
-              <Button title="Already ? SignIn" onPress={onSignInPressed()} />
-            </Pressable>
+            <View className="flex flex-col w-full text-center items-center justify-between mt-6">
+              <View className="space-y-4 w-full">
+                <TouchableOpacity
+                  className="w-full p-4 items-center rounded-xl bg-green-600 "
+                  onPress={handleSubmit(signUp)}
+                >
+                  <Text className="text-white text-md">Sign Up</Text>
+                </TouchableOpacity>
+              </View>
+              <TouchableOpacity
+                className="w-full mt-48 text-center items-center "
+                onPress={() => onSignInPressed()}
+              >
+                <Text className="text-green-800 text-md ">
+                  Already sign in ?
+                </Text>
+              </TouchableOpacity>
+            </View>
           </>
         )}
       </KeyboardAvoidingView>
-    </View>
+    </ScrollView>
   );
 }
