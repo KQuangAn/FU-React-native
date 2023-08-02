@@ -32,7 +32,7 @@ export default function CustomInput({
            ${error ? "border-red-600" : "border-gray-500"}`}
             >
               <TextInput
-                className="h-5 p-5 w-full b-1 rounded-2xl"
+                className="w-full h-12 ml-3 rounded-2xl "
                 value={value}
                 onChangeText={onChange}
                 onBlur={onBlur}

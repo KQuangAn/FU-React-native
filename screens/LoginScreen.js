@@ -42,7 +42,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <FlatList className="flex-1 flex-col w-full h-full bg-white">
+    <View className="flex-1 flex-col w-full h-full bg-white">
       <View className="m-5 my-12 w-full">
         <Text className="text-green-700 text-4xl">Welcome</Text>
         <Text className="text-2xl text-black-400 ">Sign in to continue!</Text>
@@ -118,6 +118,6 @@ export default function LoginScreen() {
       <TouchableOpacity onPress={() => navigation.navigate("Restaurant")}>
         <Text className="text-green-800 text-md ">Restaurant</Text>
       </TouchableOpacity>
-    </FlatList>
+    </View>
   );
 }

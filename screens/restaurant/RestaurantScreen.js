@@ -1,4 +1,4 @@
-import { View, Image, SafeAreaView, Text } from "react-native";
+import { View, Image, SafeAreaView, Text, FlatList } from "react-native";
 import React from "react";
 import { SearchBar } from "@rneui/base";
 import CustomViewContainer from "../../components/CustomViewContainer";
@@ -28,6 +28,7 @@ export default function RestaurantScreen() {
       >
         {featured.restaurants.map((data) => (
           <RestaurantCard
+            key={data.id}
             id={data.id}
             title={data.title}
             imgUrl={data.imgUrl}

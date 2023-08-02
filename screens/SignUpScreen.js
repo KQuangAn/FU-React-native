@@ -3,11 +3,10 @@ import {
   Button,
   KeyboardAvoidingView,
   Pressable,
-  FlatList,
+  ScrollView,
   View,
   Text,
   TouchableOpacity,
-  SafeAreaView,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
@@ -70,99 +69,96 @@ export default function SignUpScreen() {
   };
 
   return (
-    <SafeAreaView>
-      <FlatList className="flex-1 flex-col w-full h-full bg-white">
-        <View className="m-5 my-12">
-          <Text className="text-green-700 text-4xl w-full">Welcome</Text>
-          <Text className="text-2xl text-black-400 w-full ">
-            Sign up to continue!
-          </Text>
-        </View>
+    <ScrollView className="flex-1 flex-col w-full h-full bg-white">
+      <View className="m-5 my-12">
+        <Text className="text-green-700 text-4xl w-full">Welcome</Text>
+        <Text className="text-2xl text-black-400 w-full ">
+          Sign up to continue!
+        </Text>
+      </View>
 
-        <KeyboardAvoidingView
-          behavior="padding"
-          className="flex flex-col items-start mx-5 "
-        >
-          <CustomInput
-            name="username"
-            placeholder="Username"
-            secureTextEntry
-            control={control}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password should be at least 8 characters",
-              },
-              maxLength: {
-                value: 24,
-                message: "Password should be no more than 24 characters",
-              },
-            }}
-          />
-          <CustomInput
-            name="email"
-            placeholder="Email"
-            control={control}
-            rules={{
-              required: "Email is required",
-              pattern: EMAIL_REGEX,
-            }}
-          />
-          <CustomInput
-            name="password"
-            placeholder="Password"
-            secureTextEntry
-            control={control}
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password should be at least 8 characters",
-              },
-              maxLength: {
-                value: 24,
-                message: "Password should be no more than 24 characters",
-              },
-            }}
-          />
-          <CustomInput
-            name="password-repeat"
-            placeholder="Repeat Password"
-            secureTextEntry
-            control={control}
-            rules={{
-              required: "Password repeat is required",
-              validate: (value) =>
-                value === password || "Password do not match",
-            }}
-          />
-          {loading ? (
-            <ActivityIndicator size="large" color="fffff" />
-          ) : (
-            <>
-              <View className="flex flex-col w-full text-center items-center justify-between mt-6">
-                <View className="space-y-4 w-full">
-                  <TouchableOpacity
-                    className="w-full p-4 items-center rounded-xl bg-green-600 "
-                    onPress={handleSubmit(signUp)}
-                  >
-                    <Text className="text-white text-md">Sign Up</Text>
-                  </TouchableOpacity>
-                </View>
+      <KeyboardAvoidingView
+        behavior="padding"
+        className="flex flex-col items-start mx-5 "
+      >
+        <CustomInput
+          name="username"
+          placeholder="Username"
+          secureTextEntry
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password should be at least 8 characters",
+            },
+            maxLength: {
+              value: 24,
+              message: "Password should be no more than 24 characters",
+            },
+          }}
+        />
+        <CustomInput
+          name="email"
+          placeholder="Email"
+          control={control}
+          rules={{
+            required: "Email is required",
+            pattern: EMAIL_REGEX,
+          }}
+        />
+        <CustomInput
+          name="password"
+          placeholder="Password"
+          secureTextEntry
+          control={control}
+          rules={{
+            required: "Password is required",
+            minLength: {
+              value: 8,
+              message: "Password should be at least 8 characters",
+            },
+            maxLength: {
+              value: 24,
+              message: "Password should be no more than 24 characters",
+            },
+          }}
+        />
+        <CustomInput
+          name="password-repeat"
+          placeholder="Repeat Password"
+          secureTextEntry
+          control={control}
+          rules={{
+            required: "Password repeat is required",
+            validate: (value) => value === password || "Password do not match",
+          }}
+        />
+        {loading ? (
+          <ActivityIndicator size="large" color="fffff" />
+        ) : (
+          <>
+            <View className="flex flex-col w-full text-center items-center justify-between mt-6">
+              <View className="space-y-4 w-full">
                 <TouchableOpacity
-                  className="w-full mt-48 text-center items-center "
-                  onPress={() => onSignInPressed()}
+                  className="w-full p-4 items-center rounded-xl bg-green-600 "
+                  onPress={handleSubmit(signUp)}
                 >
-                  <Text className="text-green-800 text-md ">
-                    Already sign in ?
-                  </Text>
+                  <Text className="text-white text-md">Sign Up</Text>
                 </TouchableOpacity>
               </View>
-            </>
-          )}
-        </KeyboardAvoidingView>
-      </FlatList>
-    </SafeAreaView>
+              <TouchableOpacity
+                className="w-full mt-48 text-center items-center "
+                onPress={() => onSignInPressed()}
+              >
+                <Text className="text-green-800 text-md ">
+                  Already sign in ?
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </>
+        )}
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 }
