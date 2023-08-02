@@ -71,7 +71,7 @@ export default function SignUpScreen() {
 
   return (
     <SafeAreaView>
-      <FlatL className="flex-1 flex-col w-full h-full bg-white">
+      <FlatList className="flex-1 flex-col w-full h-full bg-white">
         <View className="m-5 my-12">
           <Text className="text-green-700 text-4xl w-full">Welcome</Text>
           <Text className="text-2xl text-black-400 w-full ">
