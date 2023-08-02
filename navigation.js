@@ -5,17 +5,21 @@ import HomeScreen from "./screens/HomeScreen";
 import RestaurantScreen from "./screens/RestaurantScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignUpScreen from "./screens/SignUpScreen";
+import UploadScreen from "./screens/UploadScreen";
+import ChatScreen from "./screens/ChatScreen";
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="SignUp"
+        initialRouteName="Login"
         screenOptions={{
           headerShown: false,
         }}
       >
+        <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="Upload" component={UploadScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
