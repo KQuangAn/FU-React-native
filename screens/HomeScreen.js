@@ -5,7 +5,7 @@ import {
   StatusBar,
   Image,
   TextInput,
-  ScrollView,
+  FlatList,
 } from "react-native";
 import React, { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -44,12 +44,12 @@ export default function HomeScreen() {
       </View>
 
       {/* main */}
-      <ScrollView
+      <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: 50,
         }}
-      ></ScrollView>
+      ></FlatList>
     </SafeAreaView>
   );
 }

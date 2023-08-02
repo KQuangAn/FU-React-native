@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity, Image } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Image } from "react-native";
 import React, { useState, useEffect } from "react";
 import { getCategories } from "../api";
 import { urlFor } from "../sanity";
@@ -16,7 +16,7 @@ export default function Categories() {
 
   return (
     <View className="mt-4">
-      <ScrollView
+      <FlatList
         // className="p-4"
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -51,7 +51,7 @@ export default function Categories() {
             </View>
           );
         })}
-      </ScrollView>
+      </FlatList>
     </View>
   );
 }
