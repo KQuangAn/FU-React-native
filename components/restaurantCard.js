@@ -24,36 +24,25 @@ export default function RestaurantCard({
   location,
 }) {
   // console.log(urlFor(imgUrl).url());
+
   const navigation = useNavigation();
   return (
     <TouchableWithoutFeedback
       onPress={() => {
-        navigation.navigate("Restaurant", {
-          id,
-          title,
-          imgUrl,
-          rating,
-          type,
-          address,
-          description,
-          dishes,
-          reviews,
-          location,
+        navigation.navigate("RestaurantDishes", {
+          dishes: { dishes },
         });
       }}
     >
-      <View
-        style={{ shadowColor: themeColors.bgColor(0.2), shadowRadius: 7 }}
-        className="mr-6 bg-white rounded-3xl shadow-lg w-1/2"
-      >
+      <View className="ml-1 mr-6 bg-white shadow-inherit rounded-3xl shadow-lg">
         <Image
-          style={{ width: "100%", height: "10%" }}
+          style={{ width: "100%", height: "50%" }}
           source={{
             uri: "https://engineering.fb.com/wp-content/uploads/2016/04/yearinreview.jpg",
           }}
         />
-        <View className="px-3 pb-4 space-y-2">
-          <Text className="text-lg font-bold pt-2">{title}</Text>
+        <View className="px-3 pb-4 space-y-2 ">
+          <Text className="text-sm font-bold pt-2">{title}</Text>
           <View className="flex-row items-center space-x-1">
             <Feather name="star" size={24} color="black" className="h-4 w-4" />
             <Text className="text-xs">
@@ -69,7 +58,13 @@ export default function RestaurantCard({
               color="black"
               className="w-4 h-4"
             />
-            <Text className="text-gray-700 text-xs"> Nearby · {address}</Text>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              className="text-gray-700 text-xs"
+            >
+              Nearby · {address}
+            </Text>
           </View>
         </View>
       </View>

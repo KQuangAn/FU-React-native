@@ -1,5 +1,12 @@
-import { View, Image, SafeAreaView, Text, FlatList } from "react-native";
-import React from "react";
+import {
+  View,
+  Image,
+  SafeAreaView,
+  Text,
+  FlatList,
+  ScrollView,
+} from "react-native";
+import React, { useState } from "react";
 import { SearchBar } from "@rneui/base";
 import CustomViewContainer from "../../components/CustomViewContainer";
 import { featured } from "../../constants";
@@ -22,26 +29,28 @@ export default function RestaurantScreen() {
       />
 
       <FlatList
+        removeClippedSubviews
+        data={featured.restaurants}
+        renderItem={({ item }) => (
+          <RestaurantCard
+            key={item.id}
+            id={item.id}
+            title={item.title}
+            imgUrl={item.imgUrl}
+            rating={item.rating}
+            type={item.type}
+            address={item.address}
+            description={item.description}
+            dishes={item.dishes}
+            reviews={item.reviews}
+            location={item.lat}
+          />
+        )}
+        keyExtractor={(item) => item.id} // Provide a keyExtractor for each item
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        className="w-full flex"
-      >
-        {featured.restaurants.map((data) => (
-          <RestaurantCard
-            key={data.id}
-            id={data.id}
-            title={data.title}
-            imgUrl={data.imgUrl}
-            rating={data.rating}
-            type={data.type}
-            address={data.address}
-            description={data.description}
-            dishes={data.dishes}
-            reviews={data.reviews}
-            location={data.lat}
-          ></RestaurantCard>
-        ))}
-      </FlatList>
+        className="w-full h-64 flex"
+      />
     </CustomViewContainer>
   );
 }
