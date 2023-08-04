@@ -46,8 +46,8 @@ export default function DishDetail({ route, navigation }) {
     <View className="flex-1">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Pressable className="bg-white ">
-          <TouchableOpacity onPress={toggleImageViewer}>
-            <Image className="w-full" source={dish.image} />
+          <TouchableOpacity onPress={toggleImageViewer} testID="dish-image">
+            <Image className="w-full" source={dish.image} testID="dish-image" />
           </TouchableOpacity>
           <View className="shadow-lg w-full ">
             <View className="flex flex-row p-4 justify-between flex-wrap">
@@ -164,6 +164,7 @@ export default function DishDetail({ route, navigation }) {
           onClick={toggleImageViewer} // Close the image viewer when clicked
           enableSwipeDown // Enable swipe down to close
           onSwipeDown={toggleImageViewer} // Close the image viewer when swiped down
+          testID="image-viewer"
         />
       )}
     </View>
